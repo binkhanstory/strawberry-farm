@@ -7,53 +7,34 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f5f0;color:#1a1a18;min-height:100vh}
-:root{--green:#2a5c3f;--green-l:#eaf3de;--red:#e8344a;--bd:#e0dfd8;--bg:#fff;--bg2:#f5f5f0;--t2:#6b6b66;--t3:#9e9e99;--r:10px;--rs:6px}
-
-/* ===== SETUP SCREEN ===== */
-#setup-overlay{position:fixed;inset:0;background:#f5f5f0;z-index:999;overflow-y:auto;padding:20px}
-.setup-box{max-width:680px;margin:0 auto}
-.setup-logo{display:flex;align-items:center;gap:12px;margin-bottom:28px}
-.setup-logo .icon{width:42px;height:42px;background:var(--red);border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-size:20px}
-.step-card{background:#fff;border:1px solid var(--bd);border-radius:var(--r);padding:20px;margin-bottom:16px}
-.step-num{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;background:var(--green);color:#fff;border-radius:50%;font-size:12px;font-weight:700;margin-right:8px;flex-shrink:0}
-.step-title{display:flex;align-items:center;font-size:15px;font-weight:700;margin-bottom:12px}
-.sql-block{background:#1e1e2e;color:#cdd6f4;padding:14px;border-radius:var(--rs);font-size:12px;line-height:1.7;font-family:monospace;white-space:pre-wrap;overflow-x:auto;position:relative}
-.copy-btn{position:absolute;top:8px;right:8px;padding:4px 10px;background:#45475a;color:#cdd6f4;border:none;border-radius:4px;font-size:11px;cursor:pointer}
-.copy-btn:hover{background:#585b70}
-.input-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-input,select,textarea{width:100%;padding:9px 12px;border:1px solid var(--bd);border-radius:var(--rs);font-size:13px;font-family:inherit;color:#1a1a18;background:#fff;transition:border .15s}
-input:focus,select:focus,textarea:focus{outline:none;border-color:var(--green)}
-textarea{resize:vertical}
-.conn-status{padding:8px 12px;border-radius:var(--rs);font-size:13px;margin-top:8px;display:none}
-.conn-ok{background:#eaf3de;color:#2a5c3f;border:1px solid #c0dd97}
-.conn-fail{background:#fcebeb;color:#a32d2d;border:1px solid #f7c1c1}
-
-/* ===== MAIN APP ===== */
-#main-app{display:none}
-.app-header{background:#fff;border-bottom:1px solid var(--bd);padding:13px 20px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:100}
+:root{--green:#2a5c3f;--green-light:#eaf3de;--red:#e8344a;--border:#e0dfd8;--bg:#fff;--bg2:#f5f5f0;--text:#1a1a18;--text2:#6b6b66;--text3:#9e9e99;--radius:10px;--radius-sm:6px}
+.app-header{background:#fff;border-bottom:1px solid var(--border);padding:14px 20px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:100}
 .logo{width:32px;height:32px;background:var(--red);border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-size:16px;flex-shrink:0}
-.nav-bar{display:flex;gap:4px;padding:10px 20px;background:#fff;border-bottom:1px solid var(--bd);flex-wrap:wrap;position:sticky;top:57px;z-index:99}
-.nav-btn{padding:7px 13px;border-radius:var(--rs);border:1px solid var(--bd);background:transparent;color:var(--t2);cursor:pointer;font-size:13px;transition:all .15s;font-family:inherit}
+.nav-bar{display:flex;gap:4px;padding:10px 20px;background:#fff;border-bottom:1px solid var(--border);flex-wrap:wrap;position:sticky;top:57px;z-index:99}
+.nav-btn{padding:7px 14px;border-radius:var(--radius-sm);border:1px solid var(--border);background:transparent;color:var(--text2);cursor:pointer;font-size:13px;transition:all .15s;font-family:inherit}
 .nav-btn:hover{background:#f0f0eb}
 .nav-btn.active{background:var(--green);color:white;border-color:var(--green)}
 .content{padding:20px;max-width:900px;margin:0 auto}
 .section{display:none}.section.active{display:block}
-.card{background:#fff;border:1px solid var(--bd);border-radius:var(--r);padding:16px 20px;margin-bottom:16px}
+.card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:16px 20px;margin-bottom:16px}
 .metrics-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:16px}
-.metric-card{background:var(--bg2);border-radius:var(--rs);padding:14px}
-.metric-label{font-size:12px;color:var(--t2);margin-bottom:6px}
-.metric-value{font-size:22px;font-weight:600}
-.metric-unit{font-size:11px;color:var(--t3);margin-top:2px}
+.metric-card{background:var(--bg2);border-radius:var(--radius-sm);padding:14px}
+.metric-label{font-size:12px;color:var(--text2);margin-bottom:6px}
+.metric-value{font-size:22px;font-weight:600;color:var(--text)}
+.metric-unit{font-size:11px;color:var(--text3);margin-top:2px}
 .section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
 h2{font-size:17px;font-weight:600}
 h3{font-size:15px;font-weight:600;margin-bottom:12px}
 .form-group{margin-bottom:12px}
-.form-label{display:block;font-size:12px;color:var(--t2);margin-bottom:4px;font-weight:500}
+.form-label{display:block;font-size:12px;color:var(--text2);margin-bottom:4px;font-weight:500}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+input,select,textarea{width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:13px;font-family:inherit;color:var(--text);background:#fff;transition:border .15s}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--green)}
+textarea{resize:vertical}
 .form-panel{display:none;margin-bottom:16px}
 .form-panel.open{display:block}
 .data-table{width:100%;border-collapse:collapse;font-size:12px}
-.data-table th{text-align:left;padding:9px 10px;background:var(--bg2);color:var(--t2);font-weight:600;border-bottom:1px solid var(--bd)}
+.data-table th{text-align:left;padding:9px 10px;background:var(--bg2);color:var(--text2);font-weight:600;border-bottom:1px solid var(--border)}
 .data-table td{padding:8px 10px;border-bottom:1px solid #f0f0eb;vertical-align:middle}
 .data-table tr:hover td{background:#fafaf8}
 .badge{display:inline-block;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:500}
@@ -63,815 +44,421 @@ h3{font-size:15px;font-weight:600;margin-bottom:12px}
 .badge-info{background:#e6f1fb;color:#185fa5}
 .badge-gray{background:#f1efe8;color:#5f5e5a}
 .alert-item{padding:9px 12px;border-left:3px solid;border-radius:0 6px 6px 0;background:var(--bg2);margin-bottom:8px;font-size:13px}
-.btn{padding:7px 14px;border-radius:var(--rs);border:1px solid var(--bd);background:#fff;color:#1a1a18;cursor:pointer;font-size:13px;font-family:inherit;transition:all .15s}
+.btn{padding:7px 14px;border-radius:var(--radius-sm);border:1px solid var(--border);background:#fff;color:var(--text);cursor:pointer;font-size:13px;font-family:inherit;transition:all .15s}
 .btn:hover{background:#f0f0eb}
 .btn-primary{background:var(--green);color:#fff;border-color:var(--green)}
 .btn-primary:hover{background:#1f4530}
-.btn-red{background:var(--red);color:#fff;border-color:var(--red)}
-.btn-red:hover{background:#c42a3e}
 .btn-danger{color:#a32d2d;border-color:#f7c1c1;font-size:11px}
 .btn-danger:hover{background:#fcebeb}
 .two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .calendar-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px}
-.cal-header{text-align:center;font-size:11px;color:var(--t2);padding:4px 0;font-weight:500}
+.cal-header{text-align:center;font-size:11px;color:var(--text2);padding:4px 0;font-weight:500}
 .cal-day{min-height:42px;border-radius:6px;padding:4px;font-size:12px;cursor:pointer;text-align:center;border:1px solid transparent;transition:background .1s}
 .cal-day:hover{background:#f0f0eb}
 .cal-day.today{background:#eaf3de;color:#2a5c3f;font-weight:600}
 .cal-day.has-event{border-color:#c0dd97}
-.cal-day.other-month{color:var(--t3)}
+.cal-day.other-month{color:var(--text3)}
 .event-dot{width:4px;height:4px;border-radius:50%;margin:1px auto 0}
-.info-bar{font-size:13px;padding:10px 14px;background:#faeeda;border:1px solid #fac775;border-radius:var(--rs);margin-bottom:16px;color:#633806}
-
-/* Loading */
-.loading-bar{height:2px;background:var(--green);position:fixed;top:0;left:0;width:0;z-index:9999;transition:width .3s}
-.toast{position:fixed;bottom:20px;right:20px;padding:10px 16px;border-radius:var(--rs);font-size:13px;z-index:9999;opacity:0;transition:opacity .3s;pointer-events:none}
-.toast.show{opacity:1}
-.toast-ok{background:#2a5c3f;color:#fff}
-.toast-err{background:#a32d2d;color:#fff}
-.sync-badge{font-size:10px;padding:2px 6px;border-radius:20px;background:#eaf3de;color:#2a5c3f;margin-left:6px;vertical-align:middle}
-
-/* Settings modal */
-.modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:200;align-items:center;justify-content:center}
-.modal-bg.open{display:flex}
-.modal-box{background:#fff;border-radius:var(--r);padding:24px;max-width:460px;width:90%;max-height:80vh;overflow-y:auto}
-
-@media(max-width:600px){.form-row,.two-col,.input-row{grid-template-columns:1fr}.nav-btn{font-size:12px;padding:6px 9px}}
+.info-bar{font-size:13px;padding:10px 14px;background:#faeeda;border:1px solid #fac775;border-radius:var(--radius-sm);margin-bottom:16px;color:#633806}
+@media(max-width:600px){.form-row,.two-col{grid-template-columns:1fr}.nav-btn{font-size:12px;padding:6px 10px}}
 </style>
 </head>
 <body>
 
-<!-- ===== LOADING BAR ===== -->
-<div class="loading-bar" id="loading-bar"></div>
-<div class="toast" id="toast"></div>
+<div class="app-header">
+  <div class="logo">🍓</div>
+  <div>
+    <div style="font-weight:700;font-size:15px">딸기 농장 관리 시스템</div>
+    <div style="font-size:11px;color:var(--text2)">스마트 농업 대시보드</div>
+  </div>
+  <div style="margin-left:auto;font-size:12px;color:var(--text2)" id="hdr-date"></div>
+</div>
 
-<!-- ===== SETUP SCREEN ===== -->
-<div id="setup-overlay">
-  <div class="setup-box">
-    <div class="setup-logo">
-      <div class="icon">🍓</div>
-      <div>
-        <div style="font-weight:700;font-size:18px">딸기 농장 관리 시스템</div>
-        <div style="font-size:13px;color:var(--t2)">클라우드 DB 초기 설정</div>
-      </div>
-    </div>
+<nav class="nav-bar">
+  <button class="nav-btn active" onclick="showTab('dashboard')" id="tab-dashboard">🏠 대시보드</button>
+  <button class="nav-btn" onclick="showTab('journal')" id="tab-journal">📓 농업일지</button>
+  <button class="nav-btn" onclick="showTab('harvest')" id="tab-harvest">📦 수확·판매</button>
+  <button class="nav-btn" onclick="showTab('pest')" id="tab-pest">🦠 병해충</button>
+  <button class="nav-btn" onclick="showTab('schedule')" id="tab-schedule">📅 일정</button>
+  <button class="nav-btn" onclick="showTab('reports')" id="tab-reports">📊 분석</button>
+</nav>
 
-    <!-- Step 1 -->
-    <div class="step-card">
-      <div class="step-title"><span class="step-num">1</span>Supabase 프로젝트 만들기</div>
-      <p style="font-size:13px;color:var(--t2);margin-bottom:10px">
-        <strong><a href="https://supabase.com" target="_blank" style="color:var(--green)">supabase.com</a></strong> 접속 →
-        무료 회원가입 → <strong>New Project</strong> 클릭 →
-        프로젝트 이름 입력 (예: strawberry-farm) → 비밀번호 설정 후 생성
-      </p>
-      <div style="font-size:12px;padding:8px 12px;background:#eaf3de;border-radius:var(--rs);color:#2a5c3f">
-        💡 무료 플랜으로 충분합니다 (DB 500MB, 월 2GB 전송)
-      </div>
-    </div>
+<div class="content">
 
-    <!-- Step 2 -->
-    <div class="step-card">
-      <div class="step-title"><span class="step-num">2</span>데이터베이스 테이블 생성</div>
-      <p style="font-size:13px;color:var(--t2);margin-bottom:10px">
-        프로젝트 생성 후 왼쪽 메뉴 <strong>SQL Editor</strong> → <strong>New query</strong> → 아래 코드 전체 복사 후 <strong>Run</strong>
-      </p>
-      <div class="sql-block" id="sql-block">create table journal (
-  id bigint primary key,
-  date text, weather text, tam text, tpm text,
-  water text, wamt text, growth text, bee text, notes text,
-  created_at timestamptz default now()
-);
-create table harvest (
-  id bigint primary key,
-  date text, time text,
-  sp numeric default 0, go numeric default 0, no numeric default 0,
-  chs jsonb default '[]'::jsonb,
-  rev numeric default 0,
-  created_at timestamptz default now()
-);
-create table pest (
-  id bigint primary key,
-  found text, treat text, type text, name text,
-  chem text, amt text, safe text, notes text,
-  created_at timestamptz default now()
-);
-create table schedule (
-  id bigint primary key,
-  date text, type text, title text, descr text,
-  created_at timestamptz default now()
-);
-alter table journal disable row level security;
-alter table harvest disable row level security;
-alter table pest disable row level security;
-alter table schedule disable row level security;</div>
-      <button class="copy-btn" onclick="copySql()">복사</button>
+<!-- DASHBOARD -->
+<div id="section-dashboard" class="section active">
+  <div class="section-header">
+    <h2>오늘의 현황</h2>
+    <span style="font-size:12px;color:var(--text2)" id="dash-date"></span>
+  </div>
+  <div class="metrics-grid">
+    <div class="metric-card"><div class="metric-label">오늘 수확량</div><div class="metric-value" id="d-today-harvest">—</div><div class="metric-unit">kg</div></div>
+    <div class="metric-card"><div class="metric-label">이번 달 매출</div><div class="metric-value" id="d-month-revenue">—</div><div class="metric-unit">원</div></div>
+    <div class="metric-card"><div class="metric-label">이번 달 수확</div><div class="metric-value" id="d-month-harvest">—</div><div class="metric-unit">kg</div></div>
+    <div class="metric-card"><div class="metric-label">상품화율 (특+상)</div><div class="metric-value" id="d-quality">—</div><div class="metric-unit">%</div></div>
+  </div>
+  <div class="two-col">
+    <div class="card">
+      <h3>오늘 할 일</h3>
+      <div class="alert-item" style="border-left-color:#ba7517;color:#633806">🌡 온도 체크 (낮 20~25°C / 밤 8~10°C)</div>
+      <div class="alert-item" style="border-left-color:#185fa5;color:#0c447c">🍓 수확 적기 확인 (8부 착색)</div>
+      <div class="alert-item" style="border-left-color:#3b6d11;color:#1f4530">💧 관수 상태 점검</div>
+      <div class="alert-item" style="border-left-color:#888;color:#5f5e5a">🐝 벌 활동 상태 확인</div>
     </div>
-
-    <!-- Step 3 -->
-    <div class="step-card">
-      <div class="step-title"><span class="step-num">3</span>연결 정보 입력</div>
-      <p style="font-size:13px;color:var(--t2);margin-bottom:12px">
-        왼쪽 메뉴 <strong>Settings → API</strong> 에서 아래 정보를 복사하세요.
-      </p>
-      <div class="form-group">
-        <label class="form-label">Project URL <span style="color:var(--t3)">(Project URL 항목)</span></label>
-        <input type="text" id="setup-url" placeholder="https://xxxxxxxxxx.supabase.co">
-      </div>
-      <div class="form-group">
-        <label class="form-label">Anon Public Key <span style="color:var(--t3)">(Project API keys → anon public 항목)</span></label>
-        <input type="text" id="setup-key" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...">
-      </div>
-      <div id="conn-status" class="conn-status"></div>
-      <div style="display:flex;gap:8px;margin-top:12px">
-        <button class="btn btn-primary" onclick="testConn()" style="flex:1">🔌 연결 테스트</button>
-        <button class="btn btn-red" onclick="startApp()" style="flex:1">✅ 완료 — 시작하기</button>
-      </div>
+    <div class="card">
+      <h3>최근 일지 요약</h3>
+      <div id="d-recent-journal" style="font-size:13px;color:var(--text2)">아직 등록된 일지가 없습니다.</div>
     </div>
+  </div>
+  <div class="card">
+    <h3>주간 수확량</h3>
+    <div style="position:relative;width:100%;height:180px"><canvas id="weekly-chart"></canvas></div>
   </div>
 </div>
 
-<!-- ===== SETTINGS MODAL ===== -->
-<div class="modal-bg" id="settings-modal">
-  <div class="modal-box">
-    <h3 style="margin-bottom:16px">⚙ Supabase 연결 설정</h3>
-    <div class="form-group">
-      <label class="form-label">Project URL</label>
-      <input type="text" id="modal-url" placeholder="https://xxxxxxxxxx.supabase.co">
+<!-- JOURNAL -->
+<div id="section-journal" class="section">
+  <div class="section-header">
+    <h2>일일 농업일지</h2>
+    <button class="btn" onclick="tog('journal-form')">+ 새 일지 작성</button>
+  </div>
+  <div class="card form-panel" id="journal-form">
+    <h3>일지 작성</h3>
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">날짜</label><input type="date" id="j-date"></div>
+      <div class="form-group"><label class="form-label">날씨</label><select id="j-weather"><option>맑음</option><option>흐림</option><option>비</option><option>눈</option></select></div>
     </div>
-    <div class="form-group">
-      <label class="form-label">Anon Public Key</label>
-      <input type="text" id="modal-key" placeholder="eyJ...">
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">오전 온도 (°C)</label><input type="number" id="j-tam" placeholder="예: 18"></div>
+      <div class="form-group"><label class="form-label">오후 온도 (°C)</label><input type="number" id="j-tpm" placeholder="예: 24"></div>
     </div>
-    <div id="modal-status" class="conn-status"></div>
-    <div style="display:flex;gap:8px;margin-top:12px;justify-content:flex-end">
-      <button class="btn" onclick="closeSettings()">취소</button>
-      <button class="btn btn-primary" onclick="saveSettings()">저장 및 재연결</button>
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">관수</label><select id="j-water"><option value="함">함</option><option value="안 함">안 함</option></select></div>
+      <div class="form-group"><label class="form-label">관수량 (L)</label><input type="number" id="j-wamt" placeholder="예: 50"></div>
     </div>
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">생육 상태</label><select id="j-growth"><option>양호</option><option>보통</option><option>불량</option><option>이상 징후</option></select></div>
+      <div class="form-group"><label class="form-label">벌 활동</label><select id="j-bee"><option>활발</option><option>보통</option><option>저조</option><option>없음</option></select></div>
+    </div>
+    <div class="form-group"><label class="form-label">특이사항 메모</label><textarea id="j-notes" rows="3" placeholder="이상 징후, 특이사항 등을 기록하세요..."></textarea></div>
+    <div style="display:flex;gap:8px;justify-content:flex-end">
+      <button class="btn" onclick="tog('journal-form')">취소</button>
+      <button class="btn btn-primary" onclick="saveJournal()">저장</button>
+    </div>
+  </div>
+  <div class="card" style="overflow-x:auto">
+    <table class="data-table"><thead><tr><th>날짜</th><th>날씨</th><th>온도 (오전/오후)</th><th>관수</th><th>생육</th><th>벌 활동</th><th>메모</th><th></th></tr></thead>
+    <tbody id="j-tbody"><tr><td colspan="8" style="text-align:center;color:var(--text2);padding:24px">등록된 일지가 없습니다</td></tr></tbody></table>
   </div>
 </div>
 
-<!-- ===== MAIN APP ===== -->
-<div id="main-app">
-  <div class="app-header">
-    <div class="logo">🍓</div>
-    <div>
-      <div style="font-weight:700;font-size:15px">딸기 농장 관리 시스템
-        <span class="sync-badge" id="sync-badge">☁ 클라우드 연결됨</span>
-      </div>
-      <div style="font-size:11px;color:var(--t2)">스마트 농업 대시보드</div>
+<!-- HARVEST -->
+<div id="section-harvest" class="section">
+  <div class="section-header">
+    <h2>수확·판매 관리</h2>
+    <button class="btn" onclick="tog('harvest-form')">+ 수확 기록</button>
+  </div>
+  <div class="metrics-grid">
+    <div class="metric-card"><div class="metric-label">이번 달 특품</div><div class="metric-value" id="h-special">0</div><div class="metric-unit">kg</div></div>
+    <div class="metric-card"><div class="metric-label">이번 달 상품</div><div class="metric-value" id="h-good">0</div><div class="metric-unit">kg</div></div>
+    <div class="metric-card"><div class="metric-label">이번 달 하품</div><div class="metric-value" id="h-normal">0</div><div class="metric-unit">kg</div></div>
+    <div class="metric-card"><div class="metric-label">이번 달 매출</div><div class="metric-value" id="h-revenue">0</div><div class="metric-unit">원</div></div>
+  </div>
+  <div class="card form-panel" id="harvest-form">
+    <h3>수확 기록 입력</h3>
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">수확 날짜</label><input type="date" id="h-date"></div>
+      <div class="form-group"><label class="form-label">수확 시간</label><select id="h-time"><option>오전</option><option>오후</option></select></div>
     </div>
-    <div style="margin-left:auto;display:flex;align-items:center;gap:10px">
-      <span style="font-size:12px;color:var(--t2)" id="hdr-date"></span>
-      <button class="btn" onclick="openSettings()" style="font-size:12px;padding:5px 10px">⚙</button>
+    <div style="font-size:13px;color:var(--text2);margin-bottom:8px;font-weight:600">등급별 수확량 (kg)</div>
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">특품</label><input type="number" id="h-sp" placeholder="0" step="0.1"></div>
+      <div class="form-group"><label class="form-label">상품</label><input type="number" id="h-go" placeholder="0" step="0.1"></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">하품</label><input type="number" id="h-no" placeholder="0" step="0.1"></div>
+      <div></div>
+    </div>
+    <div style="font-size:13px;color:var(--text2);margin-bottom:8px;font-weight:600">판매 채널 & 매출 (원)</div>
+    <div id="h-channels">
+      <div class="form-row ch-row" style="margin-bottom:8px">
+        <div class="form-group"><label class="form-label">채널</label><select><option>도매시장</option><option>직거래</option><option>온라인</option><option>체험농장</option><option>카카오톡</option></select></div>
+        <div class="form-group"><label class="form-label">매출</label><input type="number" placeholder="0"></div>
+      </div>
+    </div>
+    <button class="btn" onclick="addCh()" style="font-size:12px;margin-bottom:12px">+ 채널 추가</button>
+    <div style="display:flex;gap:8px;justify-content:flex-end">
+      <button class="btn" onclick="tog('harvest-form')">취소</button>
+      <button class="btn btn-primary" onclick="saveHarvest()">저장</button>
     </div>
   </div>
+  <div class="card" style="overflow-x:auto">
+    <table class="data-table"><thead><tr><th>날짜</th><th>특품(kg)</th><th>상품(kg)</th><th>하품(kg)</th><th>합계(kg)</th><th>매출(원)</th><th>주요 채널</th><th></th></tr></thead>
+    <tbody id="h-tbody"><tr><td colspan="8" style="text-align:center;color:var(--text2);padding:24px">등록된 수확 기록이 없습니다</td></tr></tbody></table>
+  </div>
+</div>
 
-  <nav class="nav-bar">
-    <button class="nav-btn active" onclick="showTab('dashboard')" id="tab-dashboard">🏠 대시보드</button>
-    <button class="nav-btn" onclick="showTab('journal')" id="tab-journal">📓 농업일지</button>
-    <button class="nav-btn" onclick="showTab('harvest')" id="tab-harvest">📦 수확·판매</button>
-    <button class="nav-btn" onclick="showTab('pest')" id="tab-pest">🦠 병해충</button>
-    <button class="nav-btn" onclick="showTab('schedule')" id="tab-schedule">📅 일정</button>
-    <button class="nav-btn" onclick="showTab('reports')" id="tab-reports">📊 분석</button>
-  </nav>
-
-  <div class="content">
-
-  <!-- DASHBOARD -->
-  <div id="section-dashboard" class="section active">
-    <div class="section-header">
-      <h2>오늘의 현황</h2>
-      <span style="font-size:12px;color:var(--t2)" id="dash-date"></span>
+<!-- PEST -->
+<div id="section-pest" class="section">
+  <div class="section-header">
+    <h2>병해충 방제 기록</h2>
+    <button class="btn" onclick="tog('pest-form')">+ 방제 기록</button>
+  </div>
+  <div class="info-bar">⚠ 주의 병해충: 흰가루병 (저온·건조) · 잿빛곰팡이병 (수확기) · 탄저병 (육묘기) · 응애 · 진딧물</div>
+  <div class="card form-panel" id="pest-form">
+    <h3>방제 기록 입력</h3>
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">발견 날짜</label><input type="date" id="p-found"></div>
+      <div class="form-group"><label class="form-label">방제 날짜</label><input type="date" id="p-treat"></div>
     </div>
-    <div class="metrics-grid">
-      <div class="metric-card"><div class="metric-label">오늘 수확량</div><div class="metric-value" id="d-today-harvest">—</div><div class="metric-unit">kg</div></div>
-      <div class="metric-card"><div class="metric-label">이번 달 매출</div><div class="metric-value" id="d-month-revenue">—</div><div class="metric-unit">원</div></div>
-      <div class="metric-card"><div class="metric-label">이번 달 수확</div><div class="metric-value" id="d-month-harvest">—</div><div class="metric-unit">kg</div></div>
-      <div class="metric-card"><div class="metric-label">상품화율 (특+상)</div><div class="metric-value" id="d-quality">—</div><div class="metric-unit">%</div></div>
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">종류</label><select id="p-type"><option>병해</option><option>해충</option></select></div>
+      <div class="form-group"><label class="form-label">병해충명</label><input type="text" id="p-name" placeholder="예: 흰가루병, 응애"></div>
     </div>
-    <div class="two-col">
-      <div class="card">
-        <h3>오늘 할 일</h3>
-        <div class="alert-item" style="border-left-color:#ba7517;color:#633806">🌡 온도 체크 (낮 20~25°C / 밤 8~10°C)</div>
-        <div class="alert-item" style="border-left-color:#185fa5;color:#0c447c">🍓 수확 적기 확인 (8부 착색)</div>
-        <div class="alert-item" style="border-left-color:#3b6d11;color:#1f4530">💧 관수 상태 점검</div>
-        <div class="alert-item" style="border-left-color:#888;color:#5f5e5a">🐝 벌 활동 상태 확인</div>
-      </div>
-      <div class="card">
-        <h3>최근 일지 요약</h3>
-        <div id="d-recent-journal" style="font-size:13px;color:var(--t2)">아직 등록된 일지가 없습니다.</div>
-      </div>
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">사용 약품</label><input type="text" id="p-chem" placeholder="약품명"></div>
+      <div class="form-group"><label class="form-label">사용량</label><input type="text" id="p-amt" placeholder="예: 100ml/10a"></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">안전사용기간 (수확 전 일수)</label><input type="number" id="p-safe" placeholder="예: 7"></div>
+      <div></div>
+    </div>
+    <div class="form-group"><label class="form-label">경과 관찰 메모</label><textarea id="p-notes" rows="2" placeholder="방제 후 경과 관찰..."></textarea></div>
+    <div style="display:flex;gap:8px;justify-content:flex-end">
+      <button class="btn" onclick="tog('pest-form')">취소</button>
+      <button class="btn btn-primary" onclick="savePest()">저장</button>
+    </div>
+  </div>
+  <div class="card" style="overflow-x:auto">
+    <table class="data-table"><thead><tr><th>발견일</th><th>방제일</th><th>종류</th><th>병해충명</th><th>약품</th><th>사용량</th><th>안전기간</th><th>메모</th><th></th></tr></thead>
+    <tbody id="p-tbody"><tr><td colspan="9" style="text-align:center;color:var(--text2);padding:24px">등록된 방제 기록이 없습니다</td></tr></tbody></table>
+  </div>
+</div>
+
+<!-- SCHEDULE -->
+<div id="section-schedule" class="section">
+  <div class="section-header">
+    <h2>일정 관리</h2>
+    <button class="btn" onclick="tog('schedule-form')">+ 일정 추가</button>
+  </div>
+  <div class="card">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+      <button class="btn" onclick="chMon(-1)">&#60; 이전</button>
+      <span style="font-weight:600;font-size:15px" id="cal-title"></span>
+      <button class="btn" onclick="chMon(1)">다음 &#62;</button>
+    </div>
+    <div class="calendar-grid" style="margin-bottom:4px">
+      <div class="cal-header" style="color:#d85a30">일</div>
+      <div class="cal-header">월</div><div class="cal-header">화</div><div class="cal-header">수</div>
+      <div class="cal-header">목</div><div class="cal-header">금</div>
+      <div class="cal-header" style="color:#185fa5">토</div>
+    </div>
+    <div class="calendar-grid" id="cal-days"></div>
+  </div>
+  <div class="card form-panel" id="schedule-form">
+    <h3>일정 추가</h3>
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">날짜</label><input type="date" id="s-date"></div>
+      <div class="form-group"><label class="form-label">종류</label><select id="s-type"><option>시비</option><option>방제</option><option>수확예정</option><option>점검</option><option>기타</option></select></div>
+    </div>
+    <div class="form-group"><label class="form-label">제목</label><input type="text" id="s-title" placeholder="일정 제목"></div>
+    <div class="form-group"><label class="form-label">내용</label><textarea id="s-desc" rows="2" placeholder="상세 내용..."></textarea></div>
+    <div style="display:flex;gap:8px;justify-content:flex-end">
+      <button class="btn" onclick="tog('schedule-form')">취소</button>
+      <button class="btn btn-primary" onclick="saveSchedule()">저장</button>
+    </div>
+  </div>
+  <div class="card">
+    <h3>예정 일정</h3>
+    <div id="upcoming-list"><p style="font-size:13px;color:var(--text2)">등록된 일정이 없습니다</p></div>
+  </div>
+</div>
+
+<!-- REPORTS -->
+<div id="section-reports" class="section">
+  <div class="section-header"><h2>분석 리포트</h2></div>
+  <div class="card">
+    <h3>월별 수확량 추이 (최근 6개월)</h3>
+    <div style="position:relative;width:100%;height:200px"><canvas id="r-monthly"></canvas></div>
+  </div>
+  <div class="two-col">
+    <div class="card">
+      <h3>채널별 매출 비율</h3>
+      <div style="position:relative;width:100%;height:200px"><canvas id="r-channel"></canvas></div>
     </div>
     <div class="card">
-      <h3>주간 수확량</h3>
-      <div style="position:relative;width:100%;height:180px"><canvas id="weekly-chart"></canvas></div>
+      <h3>등급별 수확 비율</h3>
+      <div style="position:relative;width:100%;height:200px"><canvas id="r-grade"></canvas></div>
     </div>
   </div>
-
-  <!-- JOURNAL -->
-  <div id="section-journal" class="section">
-    <div class="section-header">
-      <h2>일일 농업일지</h2>
-      <button class="btn" onclick="tog('journal-form')">+ 새 일지 작성</button>
-    </div>
-    <div class="card form-panel" id="journal-form">
-      <h3>일지 작성</h3>
-      <div class="form-row">
-        <div class="form-group"><label class="form-label">날짜</label><input type="date" id="j-date"></div>
-        <div class="form-group"><label class="form-label">날씨</label><select id="j-weather"><option>맑음</option><option>흐림</option><option>비</option><option>눈</option></select></div>
-      </div>
-      <div class="form-row">
-        <div class="form-group"><label class="form-label">오전 온도 (°C)</label><input type="number" id="j-tam" placeholder="예: 18"></div>
-        <div class="form-group"><label class="form-label">오후 온도 (°C)</label><input type="number" id="j-tpm" placeholder="예: 24"></div>
-      </div>
-      <div class="form-row">
-        <div class="form-group"><label class="form-label">관수</label><select id="j-water"><option value="함">함</option><option value="안 함">안 함</option></select></div>
-        <div class="form-group"><label class="form-label">관수량 (L)</label><input type="number" id="j-wamt" placeholder="예: 50"></div>
-      </div>
-      <div class="form-row">
-        <div class="form-group"><label class="form-label">생육 상태</label><select id="j-growth"><option>양호</option><option>보통</option><option>불량</option><option>이상 징후</option></select></div>
-        <div class="form-group"><label class="form-label">벌 활동</label><select id="j-bee"><option>활발</option><option>보통</option><option>저조</option><option>없음</option></select></div>
-      </div>
-      <div class="form-group"><label class="form-label">특이사항 메모</label><textarea id="j-notes" rows="3" placeholder="이상 징후, 특이사항 등을 기록하세요..."></textarea></div>
-      <div style="display:flex;gap:8px;justify-content:flex-end">
-        <button class="btn" onclick="tog('journal-form')">취소</button>
-        <button class="btn btn-primary" onclick="saveJournal()">저장</button>
-      </div>
-    </div>
-    <div class="card" style="overflow-x:auto">
-      <table class="data-table"><thead><tr><th>날짜</th><th>날씨</th><th>온도 (오전/오후)</th><th>관수</th><th>생육</th><th>벌 활동</th><th>메모</th><th></th></tr></thead>
-      <tbody id="j-tbody"><tr><td colspan="8" style="text-align:center;color:var(--t2);padding:24px">불러오는 중...</td></tr></tbody></table>
-    </div>
+  <div class="card">
+    <h3>온도 추이 (최근 14일)</h3>
+    <div style="position:relative;width:100%;height:200px"><canvas id="r-temp"></canvas></div>
   </div>
+</div>
 
-  <!-- HARVEST -->
-  <div id="section-harvest" class="section">
-    <div class="section-header">
-      <h2>수확·판매 관리</h2>
-      <button class="btn" onclick="tog('harvest-form')">+ 수확 기록</button>
-    </div>
-    <div class="metrics-grid">
-      <div class="metric-card"><div class="metric-label">이번 달 특품</div><div class="metric-value" id="h-special">0</div><div class="metric-unit">kg</div></div>
-      <div class="metric-card"><div class="metric-label">이번 달 상품</div><div class="metric-value" id="h-good">0</div><div class="metric-unit">kg</div></div>
-      <div class="metric-card"><div class="metric-label">이번 달 하품</div><div class="metric-value" id="h-normal">0</div><div class="metric-unit">kg</div></div>
-      <div class="metric-card"><div class="metric-label">이번 달 매출</div><div class="metric-value" id="h-revenue">0</div><div class="metric-unit">원</div></div>
-    </div>
-    <div class="card form-panel" id="harvest-form">
-      <h3>수확 기록 입력</h3>
-      <div class="form-row">
-        <div class="form-group"><label class="form-label">수확 날짜</label><input type="date" id="h-date"></div>
-        <div class="form-group"><label class="form-label">수확 시간</label><select id="h-time"><option>오전</option><option>오후</option></select></div>
-      </div>
-      <div style="font-size:13px;color:var(--t2);margin-bottom:8px;font-weight:600">등급별 수확량 (kg)</div>
-      <div class="form-row">
-        <div class="form-group"><label class="form-label">특품</label><input type="number" id="h-sp" placeholder="0" step="0.1"></div>
-        <div class="form-group"><label class="form-label">상품</label><input type="number" id="h-go" placeholder="0" step="0.1"></div>
-      </div>
-      <div class="form-row">
-        <div class="form-group"><label class="form-label">하품</label><input type="number" id="h-no" placeholder="0" step="0.1"></div>
-        <div></div>
-      </div>
-      <div style="font-size:13px;color:var(--t2);margin-bottom:8px;font-weight:600">판매 채널 & 매출 (원)</div>
-      <div id="h-channels">
-        <div class="form-row ch-row" style="margin-bottom:8px">
-          <div class="form-group"><label class="form-label">채널</label><select><option>도매시장</option><option>직거래</option><option>온라인</option><option>체험농장</option><option>카카오톡</option></select></div>
-          <div class="form-group"><label class="form-label">매출</label><input type="number" placeholder="0"></div>
-        </div>
-      </div>
-      <button class="btn" onclick="addCh()" style="font-size:12px;margin-bottom:12px">+ 채널 추가</button>
-      <div style="display:flex;gap:8px;justify-content:flex-end">
-        <button class="btn" onclick="tog('harvest-form')">취소</button>
-        <button class="btn btn-primary" onclick="saveHarvest()">저장</button>
-      </div>
-    </div>
-    <div class="card" style="overflow-x:auto">
-      <table class="data-table"><thead><tr><th>날짜</th><th>특품(kg)</th><th>상품(kg)</th><th>하품(kg)</th><th>합계(kg)</th><th>매출(원)</th><th>주요 채널</th><th></th></tr></thead>
-      <tbody id="h-tbody"><tr><td colspan="8" style="text-align:center;color:var(--t2);padding:24px">불러오는 중...</td></tr></tbody></table>
-    </div>
-  </div>
+</div><!-- end content -->
 
-  <!-- PEST -->
-  <div id="section-pest" class="section">
-    <div class="section-header">
-      <h2>병해충 방제 기록</h2>
-      <button class="btn" onclick="tog('pest-form')">+ 방제 기록</button>
-    </div>
-    <div class="info-bar">⚠ 주의 병해충: 흰가루병 (저온·건조) · 잿빛곰팡이병 (수확기) · 탄저병 (육묘기) · 응애 · 진딧물</div>
-    <div class="card form-panel" id="pest-form">
-      <h3>방제 기록 입력</h3>
-      <div class="form-row">
-        <div class="form-group"><label class="form-label">발견 날짜</label><input type="date" id="p-found"></div>
-        <div class="form-group"><label class="form-label">방제 날짜</label><input type="date" id="p-treat"></div>
-      </div>
-      <div class="form-row">
-        <div class="form-group"><label class="form-label">종류</label><select id="p-type"><option>병해</option><option>해충</option></select></div>
-        <div class="form-group"><label class="form-label">병해충명</label><input type="text" id="p-name" placeholder="예: 흰가루병, 응애"></div>
-      </div>
-      <div class="form-row">
-        <div class="form-group"><label class="form-label">사용 약품</label><input type="text" id="p-chem" placeholder="약품명"></div>
-        <div class="form-group"><label class="form-label">사용량</label><input type="text" id="p-amt" placeholder="예: 100ml/10a"></div>
-      </div>
-      <div class="form-row">
-        <div class="form-group"><label class="form-label">안전사용기간 (수확 전 일수)</label><input type="number" id="p-safe" placeholder="예: 7"></div>
-        <div></div>
-      </div>
-      <div class="form-group"><label class="form-label">경과 관찰 메모</label><textarea id="p-notes" rows="2" placeholder="방제 후 경과 관찰..."></textarea></div>
-      <div style="display:flex;gap:8px;justify-content:flex-end">
-        <button class="btn" onclick="tog('pest-form')">취소</button>
-        <button class="btn btn-primary" onclick="savePest()">저장</button>
-      </div>
-    </div>
-    <div class="card" style="overflow-x:auto">
-      <table class="data-table"><thead><tr><th>발견일</th><th>방제일</th><th>종류</th><th>병해충명</th><th>약품</th><th>사용량</th><th>안전기간</th><th>메모</th><th></th></tr></thead>
-      <tbody id="p-tbody"><tr><td colspan="9" style="text-align:center;color:var(--t2);padding:24px">불러오는 중...</td></tr></tbody></table>
-    </div>
-  </div>
-
-  <!-- SCHEDULE -->
-  <div id="section-schedule" class="section">
-    <div class="section-header">
-      <h2>일정 관리</h2>
-      <button class="btn" onclick="tog('schedule-form')">+ 일정 추가</button>
-    </div>
-    <div class="card">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
-        <button class="btn" onclick="chMon(-1)">&#60; 이전</button>
-        <span style="font-weight:600;font-size:15px" id="cal-title"></span>
-        <button class="btn" onclick="chMon(1)">다음 &#62;</button>
-      </div>
-      <div class="calendar-grid" style="margin-bottom:4px">
-        <div class="cal-header" style="color:#d85a30">일</div>
-        <div class="cal-header">월</div><div class="cal-header">화</div><div class="cal-header">수</div>
-        <div class="cal-header">목</div><div class="cal-header">금</div>
-        <div class="cal-header" style="color:#185fa5">토</div>
-      </div>
-      <div class="calendar-grid" id="cal-days"></div>
-    </div>
-    <div class="card form-panel" id="schedule-form">
-      <h3>일정 추가</h3>
-      <div class="form-row">
-        <div class="form-group"><label class="form-label">날짜</label><input type="date" id="s-date"></div>
-        <div class="form-group"><label class="form-label">종류</label><select id="s-type"><option>시비</option><option>방제</option><option>수확예정</option><option>점검</option><option>기타</option></select></div>
-      </div>
-      <div class="form-group"><label class="form-label">제목</label><input type="text" id="s-title" placeholder="일정 제목"></div>
-      <div class="form-group"><label class="form-label">내용</label><textarea id="s-desc" rows="2" placeholder="상세 내용..."></textarea></div>
-      <div style="display:flex;gap:8px;justify-content:flex-end">
-        <button class="btn" onclick="tog('schedule-form')">취소</button>
-        <button class="btn btn-primary" onclick="saveSchedule()">저장</button>
-      </div>
-    </div>
-    <div class="card">
-      <h3>예정 일정</h3>
-      <div id="upcoming-list"><p style="font-size:13px;color:var(--t2)">등록된 일정이 없습니다</p></div>
-    </div>
-  </div>
-
-  <!-- REPORTS -->
-  <div id="section-reports" class="section">
-    <div class="section-header"><h2>분석 리포트</h2></div>
-    <div class="card">
-      <h3>월별 수확량 추이 (최근 6개월)</h3>
-      <div style="position:relative;width:100%;height:200px"><canvas id="r-monthly"></canvas></div>
-    </div>
-    <div class="two-col">
-      <div class="card">
-        <h3>채널별 매출 비율</h3>
-        <div style="position:relative;width:100%;height:200px"><canvas id="r-channel"></canvas></div>
-      </div>
-      <div class="card">
-        <h3>등급별 수확 비율</h3>
-        <div style="position:relative;width:100%;height:200px"><canvas id="r-grade"></canvas></div>
-      </div>
-    </div>
-    <div class="card">
-      <h3>온도 추이 (최근 14일)</h3>
-      <div style="position:relative;width:100%;height:200px"><canvas id="r-temp"></canvas></div>
-    </div>
-  </div>
-
-  </div><!-- end .content -->
-</div><!-- end #main-app -->
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <script>
-// ============================================================
-//  GLOBALS
-// ============================================================
-let sb = null;
-const cache = { journal:[], harvest:[], pest:[], schedule:[] };
+const DB={get:k=>JSON.parse(localStorage.getItem('sf_'+k)||'[]'),set:(k,v)=>localStorage.setItem('sf_'+k,JSON.stringify(v))};
+const today=()=>{const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;};
+const thisMonth=()=>today().substring(0,7);
 
-const today = () => { const d=new Date(); return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; };
-const thisMonth = () => today().substring(0,7);
-
-// ============================================================
-//  UI HELPERS
-// ============================================================
-let loadT = null;
-function setLoading(on) {
-  const bar = document.getElementById('loading-bar');
-  if (on) { bar.style.width='60%'; bar.style.transition='width 2s'; }
-  else { bar.style.width='100%'; bar.style.transition='width .2s'; setTimeout(()=>{ bar.style.width='0'; bar.style.transition='none'; },300); }
-}
-function showToast(msg, ok=true) {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.className = 'toast ' + (ok?'toast-ok':'toast-err') + ' show';
-  clearTimeout(loadT);
-  loadT = setTimeout(()=>t.classList.remove('show'), 2800);
-}
-function tog(id) {
-  const el = document.getElementById(id);
-  el.classList.toggle('open');
-  if (el.classList.contains('open')) {
-    const di = el.querySelector('input[type=date]');
-    if (di && !di.value) di.value = today();
-  }
-}
-
-// ============================================================
-//  SUPABASE HELPERS
-// ============================================================
-const SB = {
-  async getAll(table) {
-    const order = table==='schedule' ? {ascending:true} : {ascending:false};
-    const {data, error} = await sb.from(table).select('*').order('id', order);
-    if (error) { showToast('로드 오류: '+error.message, false); return []; }
-    return data || [];
-  },
-  async insert(table, row) {
-    const {error} = await sb.from(table).insert(row);
-    if (error) { showToast('저장 오류: '+error.message, false); return false; }
-    return true;
-  },
-  async remove(table, id) {
-    const {error} = await sb.from(table).delete().eq('id', id);
-    if (error) { showToast('삭제 오류: '+error.message, false); return false; }
-    return true;
-  }
-};
-
-async function loadAll() {
-  setLoading(true);
-  const [j,h,p,s] = await Promise.all([
-    SB.getAll('journal'), SB.getAll('harvest'),
-    SB.getAll('pest'), SB.getAll('schedule')
-  ]);
-  cache.journal=j; cache.harvest=h; cache.pest=p; cache.schedule=s;
-  setLoading(false);
-}
-
-// ============================================================
-//  SETUP / SETTINGS
-// ============================================================
-function copySql() {
-  navigator.clipboard.writeText(document.getElementById('sql-block').textContent)
-    .then(()=>showToast('SQL 복사 완료!'))
-    .catch(()=>alert(document.getElementById('sql-block').textContent));
-}
-
-async function testConn(statusId='conn-status', urlId='setup-url', keyId='setup-key') {
-  const url = document.getElementById(urlId).value.trim();
-  const key = document.getElementById(keyId).value.trim();
-  const st = document.getElementById(statusId);
-  if (!url||!key) { st.textContent='URL과 Key를 모두 입력해주세요.'; st.className='conn-status conn-fail'; st.style.display='block'; return false; }
-  try {
-    const client = window.supabase.createClient(url, key);
-    const {error} = await client.from('journal').select('id').limit(1);
-    if (error) throw error;
-    st.textContent='✅ 연결 성공! 이제 시작하기 버튼을 클릭하세요.';
-    st.className='conn-status conn-ok'; st.style.display='block';
-    return true;
-  } catch(e) {
-    st.textContent='❌ 연결 실패: '+e.message+' — URL과 Key를 다시 확인해주세요.';
-    st.className='conn-status conn-fail'; st.style.display='block';
-    return false;
-  }
-}
-
-async function startApp() {
-  const url = document.getElementById('setup-url').value.trim();
-  const key = document.getElementById('setup-key').value.trim();
-  if (!url||!key) { showToast('URL과 Key를 입력해주세요.', false); return; }
-  localStorage.setItem('sb_url', url);
-  localStorage.setItem('sb_key', key);
-  sb = window.supabase.createClient(url, key);
-  document.getElementById('setup-overlay').style.display='none';
-  document.getElementById('main-app').style.display='block';
-  await loadAll();
-  initApp();
-}
-
-function openSettings() {
-  document.getElementById('modal-url').value = localStorage.getItem('sb_url')||'';
-  document.getElementById('modal-key').value = localStorage.getItem('sb_key')||'';
-  document.getElementById('modal-status').style.display='none';
-  document.getElementById('settings-modal').classList.add('open');
-}
-function closeSettings() { document.getElementById('settings-modal').classList.remove('open'); }
-async function saveSettings() {
-  const url = document.getElementById('modal-url').value.trim();
-  const key = document.getElementById('modal-key').value.trim();
-  localStorage.setItem('sb_url', url);
-  localStorage.setItem('sb_key', key);
-  sb = window.supabase.createClient(url, key);
-  closeSettings();
-  await loadAll();
-  renderAll();
-  showToast('설정이 저장되었습니다.');
-}
-
-// ============================================================
-//  NAVIGATION
-// ============================================================
-function showTab(t) {
+function showTab(t){
   document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
   document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
   document.getElementById('section-'+t).classList.add('active');
   document.getElementById('tab-'+t).classList.add('active');
-  if(t==='dashboard') refreshDash();
-  if(t==='reports') refreshReports();
-  if(t==='schedule') renderCal();
-  if(t==='harvest') refreshHMetrics();
+  if(t==='dashboard')refreshDash();
+  if(t==='reports')refreshReports();
+  if(t==='schedule')renderCal();
+  if(t==='harvest')refreshHMetrics();
+}
+function tog(id){
+  const el=document.getElementById(id);el.classList.toggle('open');
+  if(el.classList.contains('open')){const di=el.querySelector('input[type=date]');if(di&&!di.value)di.value=today();}
 }
 
-function renderAll() {
-  renderJournal(); renderHarvest(); renderPest();
-  refreshDash(); renderCal();
-}
-
-// ============================================================
-//  JOURNAL
-// ============================================================
-async function saveJournal() {
-  const row = {
-    id:Date.now(), date:document.getElementById('j-date').value,
-    weather:document.getElementById('j-weather').value,
-    tam:document.getElementById('j-tam').value,
-    tpm:document.getElementById('j-tpm').value,
-    water:document.getElementById('j-water').value,
-    wamt:document.getElementById('j-wamt').value,
-    growth:document.getElementById('j-growth').value,
-    bee:document.getElementById('j-bee').value,
-    notes:document.getElementById('j-notes').value
-  };
-  if(!row.date){showToast('날짜를 선택해주세요.',false);return;}
-  const ok = await SB.insert('journal', row);
-  if(!ok) return;
-  cache.journal.unshift(row);
-  renderJournal(); tog('journal-form');
+// JOURNAL
+function saveJournal(){
+  const e={id:Date.now(),date:document.getElementById('j-date').value,weather:document.getElementById('j-weather').value,tam:document.getElementById('j-tam').value,tpm:document.getElementById('j-tpm').value,water:document.getElementById('j-water').value,wamt:document.getElementById('j-wamt').value,growth:document.getElementById('j-growth').value,bee:document.getElementById('j-bee').value,notes:document.getElementById('j-notes').value};
+  if(!e.date){alert('날짜를 선택해주세요');return;}
+  const d=DB.get('journal');d.unshift(e);DB.set('journal',d);
+  renderJournal();tog('journal-form');
   ['j-tam','j-tpm','j-wamt','j-notes'].forEach(id=>document.getElementById(id).value='');
-  showToast('일지가 저장되었습니다. ☁');
 }
-
-async function delJournal(id) {
-  if(!confirm('삭제하시겠습니까?')) return;
-  const ok = await SB.remove('journal', id);
-  if(!ok) return;
-  cache.journal = cache.journal.filter(e=>e.id!==id);
-  renderJournal(); showToast('삭제되었습니다.');
-}
-
+function delJournal(id){if(!confirm('삭제하시겠습니까?'))return;DB.set('journal',DB.get('journal').filter(e=>e.id!==id));renderJournal();}
 const wIcon={맑음:'☀',흐림:'☁',비:'🌧',눈:'❄'};
 const gBadge={양호:'success',보통:'gray',불량:'danger','이상 징후':'warning'};
-function renderJournal() {
-  const tb = document.getElementById('j-tbody');
-  if(!cache.journal.length){tb.innerHTML='<tr><td colspan="8" style="text-align:center;color:var(--t2);padding:24px">등록된 일지가 없습니다</td></tr>';return;}
-  tb.innerHTML = cache.journal.map(e=>`<tr>
-    <td>${e.date}</td><td>${wIcon[e.weather]||''} ${e.weather}</td>
-    <td>${e.tam||'-'}°C / ${e.tpm||'-'}°C</td>
-    <td>${e.water}${e.wamt?' ('+e.wamt+'L)':''}</td>
-    <td><span class="badge badge-${gBadge[e.growth]||'gray'}">${e.growth}</span></td>
-    <td>${e.bee}</td>
-    <td style="max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${e.notes||'-'}</td>
-    <td><button class="btn btn-danger" onclick="delJournal(${e.id})">삭제</button></td>
-  </tr>`).join('');
+function renderJournal(){
+  const d=DB.get('journal');const tb=document.getElementById('j-tbody');
+  if(!d.length){tb.innerHTML='<tr><td colspan="8" style="text-align:center;color:var(--text2);padding:24px">등록된 일지가 없습니다</td></tr>';return;}
+  tb.innerHTML=d.map(e=>`<tr><td>${e.date}</td><td>${wIcon[e.weather]||''} ${e.weather}</td><td>${e.tam||'-'}°C / ${e.tpm||'-'}°C</td><td>${e.water}${e.wamt?' ('+e.wamt+'L)':''}</td><td><span class="badge badge-${gBadge[e.growth]||'gray'}">${e.growth}</span></td><td>${e.bee}</td><td style="max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${e.notes||'-'}</td><td><button class="btn btn-danger" onclick="delJournal(${e.id})">삭제</button></td></tr>`).join('');
 }
 
-// ============================================================
-//  HARVEST
-// ============================================================
-function addCh() {
-  const c = document.getElementById('h-channels');
-  const d = document.createElement('div');
-  d.className='form-row ch-row'; d.style.marginBottom='8px';
+// HARVEST
+function addCh(){
+  const c=document.getElementById('h-channels');const d=document.createElement('div');d.className='form-row ch-row';d.style.marginBottom='8px';
   d.innerHTML='<div class="form-group"><select><option>도매시장</option><option>직거래</option><option>온라인</option><option>체험농장</option><option>카카오톡</option></select></div><div class="form-group"><input type="number" placeholder="0"></div>';
   c.appendChild(d);
 }
-
-async function saveHarvest() {
-  const chs=[];
-  document.querySelectorAll('.ch-row').forEach(r=>{
-    const s=r.querySelector('select'),i=r.querySelector('input');
-    if(s&&i&&i.value) chs.push({ch:s.value,rev:parseFloat(i.value)||0});
-  });
-  const row={
-    id:Date.now(), date:document.getElementById('h-date').value,
-    time:document.getElementById('h-time').value,
-    sp:parseFloat(document.getElementById('h-sp').value)||0,
-    go:parseFloat(document.getElementById('h-go').value)||0,
-    no:parseFloat(document.getElementById('h-no').value)||0,
-    chs, rev:chs.reduce((s,c)=>s+c.rev,0)
-  };
-  if(!row.date){showToast('날짜를 선택해주세요.',false);return;}
-  const ok = await SB.insert('harvest', row);
-  if(!ok) return;
-  cache.harvest.unshift(row);
-  renderHarvest(); refreshHMetrics(); tog('harvest-form');
+function saveHarvest(){
+  const chs=[];document.querySelectorAll('.ch-row').forEach(r=>{const s=r.querySelector('select'),i=r.querySelector('input');if(s&&i&&i.value)chs.push({ch:s.value,rev:parseFloat(i.value)||0});});
+  const e={id:Date.now(),date:document.getElementById('h-date').value,time:document.getElementById('h-time').value,sp:parseFloat(document.getElementById('h-sp').value)||0,go:parseFloat(document.getElementById('h-go').value)||0,no:parseFloat(document.getElementById('h-no').value)||0,chs,rev:chs.reduce((s,c)=>s+c.rev,0)};
+  if(!e.date){alert('날짜를 선택해주세요');return;}
+  const d=DB.get('harvest');d.unshift(e);DB.set('harvest',d);
+  renderHarvest();refreshHMetrics();tog('harvest-form');
   ['h-sp','h-go','h-no'].forEach(id=>document.getElementById(id).value='');
-  document.getElementById('h-channels').innerHTML=`<div class="form-row ch-row" style="margin-bottom:8px"><div class="form-group"><label class="form-label">채널</label><select><option>도매시장</option><option>직거래</option><option>온라인</option><option>체험농장</option><option>카카오톡</option></select></div><div class="form-group"><label class="form-label">매출</label><input type="number" placeholder="0"></div></div>`;
-  showToast('수확 기록이 저장되었습니다. ☁');
+  document.getElementById('h-channels').innerHTML='<div class="form-row ch-row" style="margin-bottom:8px"><div class="form-group"><label class="form-label">채널</label><select><option>도매시장</option><option>직거래</option><option>온라인</option><option>체험농장</option><option>카카오톡</option></select></div><div class="form-group"><label class="form-label">매출</label><input type="number" placeholder="0"></div></div>';
+}
+function delHarvest(id){if(!confirm('삭제하시겠습니까?'))return;DB.set('harvest',DB.get('harvest').filter(e=>e.id!==id));renderHarvest();refreshHMetrics();}
+function renderHarvest(){
+  const d=DB.get('harvest');const tb=document.getElementById('h-tbody');
+  if(!d.length){tb.innerHTML='<tr><td colspan="8" style="text-align:center;color:var(--text2);padding:24px">등록된 수확 기록이 없습니다</td></tr>';return;}
+  tb.innerHTML=d.map(e=>`<tr><td>${e.date} ${e.time}</td><td>${e.sp.toFixed(1)}</td><td>${e.go.toFixed(1)}</td><td>${e.no.toFixed(1)}</td><td style="font-weight:600">${(e.sp+e.go+e.no).toFixed(1)}</td><td>${e.rev.toLocaleString()}</td><td>${e.chs.length?e.chs[0].ch:'-'}</td><td><button class="btn btn-danger" onclick="delHarvest(${e.id})">삭제</button></td></tr>`).join('');
+}
+function refreshHMetrics(){
+  const m=thisMonth();const d=DB.get('harvest').filter(e=>e.date.startsWith(m));
+  document.getElementById('h-special').textContent=d.reduce((s,e)=>s+e.sp,0).toFixed(1);
+  document.getElementById('h-good').textContent=d.reduce((s,e)=>s+e.go,0).toFixed(1);
+  document.getElementById('h-normal').textContent=d.reduce((s,e)=>s+e.no,0).toFixed(1);
+  document.getElementById('h-revenue').textContent=d.reduce((s,e)=>s+e.rev,0).toLocaleString();
 }
 
-async function delHarvest(id) {
-  if(!confirm('삭제하시겠습니까?')) return;
-  const ok = await SB.remove('harvest', id);
-  if(!ok) return;
-  cache.harvest = cache.harvest.filter(e=>e.id!==id);
-  renderHarvest(); refreshHMetrics(); showToast('삭제되었습니다.');
-}
-
-function renderHarvest() {
-  const tb = document.getElementById('h-tbody');
-  if(!cache.harvest.length){tb.innerHTML='<tr><td colspan="8" style="text-align:center;color:var(--t2);padding:24px">등록된 수확 기록이 없습니다</td></tr>';return;}
-  tb.innerHTML = cache.harvest.map(e=>`<tr>
-    <td>${e.date} ${e.time}</td>
-    <td>${parseFloat(e.sp||0).toFixed(1)}</td><td>${parseFloat(e.go||0).toFixed(1)}</td><td>${parseFloat(e.no||0).toFixed(1)}</td>
-    <td style="font-weight:600">${(parseFloat(e.sp||0)+parseFloat(e.go||0)+parseFloat(e.no||0)).toFixed(1)}</td>
-    <td>${parseFloat(e.rev||0).toLocaleString()}</td>
-    <td>${e.chs&&e.chs.length?e.chs[0].ch:'-'}</td>
-    <td><button class="btn btn-danger" onclick="delHarvest(${e.id})">삭제</button></td>
-  </tr>`).join('');
-}
-
-function refreshHMetrics() {
-  const m=thisMonth();const d=cache.harvest.filter(e=>e.date&&e.date.startsWith(m));
-  document.getElementById('h-special').textContent=d.reduce((s,e)=>s+parseFloat(e.sp||0),0).toFixed(1);
-  document.getElementById('h-good').textContent=d.reduce((s,e)=>s+parseFloat(e.go||0),0).toFixed(1);
-  document.getElementById('h-normal').textContent=d.reduce((s,e)=>s+parseFloat(e.no||0),0).toFixed(1);
-  document.getElementById('h-revenue').textContent=d.reduce((s,e)=>s+parseFloat(e.rev||0),0).toLocaleString();
-}
-
-// ============================================================
-//  PEST
-// ============================================================
-async function savePest() {
-  const row={
-    id:Date.now(), found:document.getElementById('p-found').value,
-    treat:document.getElementById('p-treat').value,
-    type:document.getElementById('p-type').value,
-    name:document.getElementById('p-name').value,
-    chem:document.getElementById('p-chem').value,
-    amt:document.getElementById('p-amt').value,
-    safe:document.getElementById('p-safe').value,
-    notes:document.getElementById('p-notes').value
-  };
-  if(!row.found||!row.name){showToast('발견일과 병해충명을 입력해주세요.',false);return;}
-  const ok = await SB.insert('pest', row);
-  if(!ok) return;
-  cache.pest.unshift(row);
-  renderPest(); tog('pest-form');
+// PEST
+function savePest(){
+  const e={id:Date.now(),found:document.getElementById('p-found').value,treat:document.getElementById('p-treat').value,type:document.getElementById('p-type').value,name:document.getElementById('p-name').value,chem:document.getElementById('p-chem').value,amt:document.getElementById('p-amt').value,safe:document.getElementById('p-safe').value,notes:document.getElementById('p-notes').value};
+  if(!e.found||!e.name){alert('발견일과 병해충명을 입력해주세요');return;}
+  const d=DB.get('pest');d.unshift(e);DB.set('pest',d);
+  renderPest();tog('pest-form');
   ['p-name','p-chem','p-amt','p-safe','p-notes'].forEach(id=>document.getElementById(id).value='');
-  showToast('방제 기록이 저장되었습니다. ☁');
+}
+function delPest(id){if(!confirm('삭제하시겠습니까?'))return;DB.set('pest',DB.get('pest').filter(e=>e.id!==id));renderPest();}
+function renderPest(){
+  const d=DB.get('pest');const tb=document.getElementById('p-tbody');
+  if(!d.length){tb.innerHTML='<tr><td colspan="9" style="text-align:center;color:var(--text2);padding:24px">등록된 방제 기록이 없습니다</td></tr>';return;}
+  tb.innerHTML=d.map(e=>`<tr><td>${e.found}</td><td>${e.treat}</td><td><span class="badge badge-${e.type==='병해'?'warning':'danger'}">${e.type}</span></td><td style="font-weight:600">${e.name}</td><td>${e.chem||'-'}</td><td>${e.amt||'-'}</td><td>${e.safe?e.safe+'일':'-'}</td><td style="max-width:100px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${e.notes||'-'}</td><td><button class="btn btn-danger" onclick="delPest(${e.id})">삭제</button></td></tr>`).join('');
 }
 
-async function delPest(id) {
-  if(!confirm('삭제하시겠습니까?')) return;
-  const ok = await SB.remove('pest', id);
-  if(!ok) return;
-  cache.pest = cache.pest.filter(e=>e.id!==id);
-  renderPest(); showToast('삭제되었습니다.');
-}
-
-function renderPest() {
-  const tb=document.getElementById('p-tbody');
-  if(!cache.pest.length){tb.innerHTML='<tr><td colspan="9" style="text-align:center;color:var(--t2);padding:24px">등록된 방제 기록이 없습니다</td></tr>';return;}
-  tb.innerHTML=cache.pest.map(e=>`<tr>
-    <td>${e.found}</td><td>${e.treat||'-'}</td>
-    <td><span class="badge badge-${e.type==='병해'?'warning':'danger'}">${e.type}</span></td>
-    <td style="font-weight:600">${e.name}</td>
-    <td>${e.chem||'-'}</td><td>${e.amt||'-'}</td>
-    <td>${e.safe?e.safe+'일':'-'}</td>
-    <td style="max-width:100px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${e.notes||'-'}</td>
-    <td><button class="btn btn-danger" onclick="delPest(${e.id})">삭제</button></td>
-  </tr>`).join('');
-}
-
-// ============================================================
-//  SCHEDULE
-// ============================================================
-let cY, cM;
+// SCHEDULE
+let cY,cM;
 const tColor={시비:'#3b6d11',방제:'#d85a30',수확예정:'#e8344a',점검:'#185fa5',기타:'#888780'};
 const tBadge={시비:'success',방제:'warning',수확예정:'danger',점검:'info',기타:'gray'};
-
-async function saveSchedule() {
-  const row={
-    id:Date.now(), date:document.getElementById('s-date').value,
-    type:document.getElementById('s-type').value,
-    title:document.getElementById('s-title').value,
-    descr:document.getElementById('s-desc').value
-  };
-  if(!row.date||!row.title){showToast('날짜와 제목을 입력해주세요.',false);return;}
-  const ok = await SB.insert('schedule', row);
-  if(!ok) return;
-  cache.schedule.push(row);
-  cache.schedule.sort((a,b)=>a.date.localeCompare(b.date));
-  renderCal(); renderUpcoming(); tog('schedule-form');
-  document.getElementById('s-title').value=''; document.getElementById('s-desc').value='';
-  showToast('일정이 저장되었습니다. ☁');
+function saveSchedule(){
+  const e={id:Date.now(),date:document.getElementById('s-date').value,type:document.getElementById('s-type').value,title:document.getElementById('s-title').value,desc:document.getElementById('s-desc').value};
+  if(!e.date||!e.title){alert('날짜와 제목을 입력해주세요');return;}
+  const d=DB.get('schedule');d.push(e);d.sort((a,b)=>a.date.localeCompare(b.date));DB.set('schedule',d);
+  renderCal();renderUpcoming();tog('schedule-form');
+  document.getElementById('s-title').value='';document.getElementById('s-desc').value='';
 }
-
-async function delSchedule(id) {
-  if(!confirm('삭제하시겠습니까?')) return;
-  const ok = await SB.remove('schedule', id);
-  if(!ok) return;
-  cache.schedule = cache.schedule.filter(e=>e.id!==id);
-  renderCal(); renderUpcoming(); showToast('삭제되었습니다.');
-}
-
+function delSchedule(id){if(!confirm('삭제하시겠습니까?'))return;DB.set('schedule',DB.get('schedule').filter(e=>e.id!==id));renderCal();renderUpcoming();}
 function chMon(dir){cM+=dir;if(cM>11){cM=0;cY++;}if(cM<0){cM=11;cY--;}renderCal();}
-
 function renderCal(){
-  const now=new Date();
-  if(cY===undefined){cY=now.getFullYear();cM=now.getMonth();}
+  const now=new Date();if(cY===undefined){cY=now.getFullYear();cM=now.getMonth();}
   document.getElementById('cal-title').textContent=`${cY}년 ${cM+1}월`;
-  const sdMap={};
-  cache.schedule.forEach(s=>{if(!sdMap[s.date])sdMap[s.date]=[];sdMap[s.date].push(s);});
-  const fd=new Date(cY,cM,1).getDay(), dim=new Date(cY,cM+1,0).getDate(), todStr=today();
+  const scheds=DB.get('schedule');const sdMap={};
+  scheds.forEach(s=>{if(!sdMap[s.date])sdMap[s.date]=[];sdMap[s.date].push(s);});
+  const fd=new Date(cY,cM,1).getDay();const dim=new Date(cY,cM+1,0).getDate();const todStr=today();
   let h='';
-  for(let i=0;i<fd;i++) h+='<div class="cal-day other-month"></div>';
+  for(let i=0;i<fd;i++)h+='<div class="cal-day other-month"></div>';
   for(let d=1;d<=dim;d++){
     const ds=`${cY}-${String(cM+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-    const ev=sdMap[ds]; const isT=ds===todStr;
-    h+=`<div class="cal-day ${isT?'today':''} ${ev?'has-event':''}" onclick="dayClick('${ds}')">
-      <div>${d}</div>${ev?ev.slice(0,3).map(s=>`<div class="event-dot" style="background:${tColor[s.type]||'#888'}"></div>`).join(''):''}
-    </div>`;
+    const ev=sdMap[ds];const isT=ds===todStr;
+    h+=`<div class="cal-day ${isT?'today':''} ${ev?'has-event':''}" onclick="dayClick('${ds}')"><div>${d}</div>${ev?ev.slice(0,3).map(s=>`<div class="event-dot" style="background:${tColor[s.type]||'#888'}"></div>`).join(''):''}</div>`;
   }
-  document.getElementById('cal-days').innerHTML=h;
-  renderUpcoming();
+  document.getElementById('cal-days').innerHTML=h;renderUpcoming();
 }
-
 function dayClick(ds){
-  const ev=cache.schedule.filter(s=>s.date===ds);
+  const ev=DB.get('schedule').filter(s=>s.date===ds);
   if(!ev.length){document.getElementById('s-date').value=ds;if(!document.getElementById('schedule-form').classList.contains('open'))tog('schedule-form');return;}
-  alert(`${ds} 일정\n\n`+ev.map(s=>`[${s.type}] ${s.title}${s.descr?'\n'+s.descr:''}`).join('\n\n'));
+  alert(`${ds} 일정\n\n`+ev.map(s=>`[${s.type}] ${s.title}${s.desc?'\n'+s.desc:''}`).join('\n\n'));
 }
-
 function renderUpcoming(){
-  const now=today(), d=cache.schedule.filter(s=>s.date>=now).slice(0,8);
-  const c=document.getElementById('upcoming-list');
-  if(!d.length){c.innerHTML='<p style="font-size:13px;color:var(--t2)">예정된 일정이 없습니다</p>';return;}
-  c.innerHTML=d.map(s=>`<div style="display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid #f0f0eb">
-    <span class="badge badge-${tBadge[s.type]||'gray'}" style="min-width:52px;text-align:center">${s.type}</span>
-    <span style="font-size:12px;color:var(--t2);min-width:82px">${s.date}</span>
-    <span style="font-size:13px;flex:1">${s.title}</span>
-    <button class="btn btn-danger" onclick="delSchedule(${s.id})">삭제</button>
-  </div>`).join('');
+  const now=today();const d=DB.get('schedule').filter(s=>s.date>=now).slice(0,8);const c=document.getElementById('upcoming-list');
+  if(!d.length){c.innerHTML='<p style="font-size:13px;color:var(--text2)">예정된 일정이 없습니다</p>';return;}
+  c.innerHTML=d.map(s=>`<div style="display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid #f0f0eb"><span class="badge badge-${tBadge[s.type]||'gray'}" style="min-width:52px;text-align:center">${s.type}</span><span style="font-size:12px;color:var(--text2);min-width:82px">${s.date}</span><span style="font-size:13px;flex:1">${s.title}</span><button class="btn btn-danger" onclick="delSchedule(${s.id})">삭제</button></div>`).join('');
 }
 
-// ============================================================
-//  DASHBOARD
-// ============================================================
+// DASHBOARD
 let wChart=null;
 function refreshDash(){
-  const now=new Date(), todStr=today(), mStr=thisMonth();
+  const now=new Date();const todStr=today();const mStr=thisMonth();
   document.getElementById('hdr-date').textContent=now.toLocaleDateString('ko-KR',{year:'numeric',month:'long',day:'numeric'});
   document.getElementById('dash-date').textContent=now.toLocaleDateString('ko-KR',{year:'numeric',month:'long',day:'numeric',weekday:'long'});
-  const allH=cache.harvest;
-  const todH=allH.filter(e=>e.date===todStr), monH=allH.filter(e=>e.date&&e.date.startsWith(mStr));
-  const todTot=todH.reduce((s,e)=>s+parseFloat(e.sp||0)+parseFloat(e.go||0)+parseFloat(e.no||0),0);
-  const monTot=monH.reduce((s,e)=>s+parseFloat(e.sp||0)+parseFloat(e.go||0)+parseFloat(e.no||0),0);
-  const monRev=monH.reduce((s,e)=>s+parseFloat(e.rev||0),0);
-  const monSp=monH.reduce((s,e)=>s+parseFloat(e.sp||0),0);
-  const monGo=monH.reduce((s,e)=>s+parseFloat(e.go||0),0);
+  const allH=DB.get('harvest');
+  const todH=allH.filter(e=>e.date===todStr);const monH=allH.filter(e=>e.date.startsWith(mStr));
+  const todTot=todH.reduce((s,e)=>s+e.sp+e.go+e.no,0);
+  const monTot=monH.reduce((s,e)=>s+e.sp+e.go+e.no,0);
+  const monRev=monH.reduce((s,e)=>s+e.rev,0);
+  const monSp=monH.reduce((s,e)=>s+e.sp,0);const monGo=monH.reduce((s,e)=>s+e.go,0);
   const qr=monTot>0?Math.round((monSp+monGo)/monTot*100):null;
   document.getElementById('d-today-harvest').textContent=todTot?todTot.toFixed(1):'—';
   document.getElementById('d-month-revenue').textContent=monRev?monRev.toLocaleString():'—';
   document.getElementById('d-month-harvest').textContent=monTot?monTot.toFixed(1):'—';
   document.getElementById('d-quality').textContent=qr!==null?qr:'—';
-  const jnl=cache.journal, rj=document.getElementById('d-recent-journal');
-  if(jnl.length){const j=jnl[0];rj.innerHTML=`<div style="font-size:11px;color:var(--t3)">${j.date}</div><div style="font-size:13px;margin:4px 0">날씨: ${j.weather} | 생육: ${j.growth}</div><div style="font-size:13px">온도: ${j.tam||'-'}°C/${j.tpm||'-'}°C | 벌: ${j.bee}</div>${j.notes?`<div style="font-size:12px;color:var(--t2);margin-top:4px;font-style:italic">${j.notes}</div>`:''}`;}
-  else rj.innerHTML='<p style="font-size:13px;color:var(--t2)">아직 등록된 일지가 없습니다.</p>';
+  const jnl=DB.get('journal');const rj=document.getElementById('d-recent-journal');
+  if(jnl.length){const j=jnl[0];rj.innerHTML=`<div style="font-size:11px;color:var(--text3)">${j.date}</div><div style="font-size:13px;margin:4px 0">날씨: ${j.weather} | 생육: ${j.growth}</div><div style="font-size:13px">온도: ${j.tam||'-'}°C/${j.tpm||'-'}°C | 벌: ${j.bee}</div>${j.notes?`<div style="font-size:12px;color:var(--text2);margin-top:4px;font-style:italic">${j.notes}</div>`:''}`;}
+  else rj.innerHTML='<p style="font-size:13px;color:var(--text2)">아직 등록된 일지가 없습니다.</p>';
   const last7=[],lbls=[];
-  for(let i=6;i>=0;i--){const d=new Date(now);d.setDate(d.getDate()-i);const ds=d.toISOString().split('T')[0];const dH=allH.filter(e=>e.date===ds);last7.push(parseFloat(dH.reduce((s,e)=>s+parseFloat(e.sp||0)+parseFloat(e.go||0)+parseFloat(e.no||0),0).toFixed(1)));lbls.push(`${d.getMonth()+1}/${d.getDate()}`);}
+  for(let i=6;i>=0;i--){const d=new Date(now);d.setDate(d.getDate()-i);const ds=d.toISOString().split('T')[0];const dH=allH.filter(e=>e.date===ds);last7.push(parseFloat(dH.reduce((s,e)=>s+e.sp+e.go+e.no,0).toFixed(1)));lbls.push(`${d.getMonth()+1}/${d.getDate()}`);}
   if(wChart)wChart.destroy();
   wChart=new Chart(document.getElementById('weekly-chart'),{type:'bar',data:{labels:lbls,datasets:[{label:'수확량(kg)',data:last7,backgroundColor:'#639922',borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,ticks:{font:{size:11}}},x:{ticks:{font:{size:11}},grid:{display:false}}}}});
 }
 
-// ============================================================
-//  REPORTS
-// ============================================================
+// REPORTS
 const RC={};
 function refreshReports(){
-  const now=new Date(), allH=cache.harvest, allJ=cache.journal;
+  const now=new Date();const allH=DB.get('harvest');const allJ=DB.get('journal');
   const mLabels=[],mData=[];
-  for(let i=5;i>=0;i--){const d=new Date(now.getFullYear(),now.getMonth()-i,1);const k=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`;mLabels.push(`${d.getMonth()+1}월`);const t=allH.filter(e=>e.date&&e.date.startsWith(k)).reduce((s,e)=>s+parseFloat(e.sp||0)+parseFloat(e.go||0)+parseFloat(e.no||0),0);mData.push(parseFloat(t.toFixed(1)));}
+  for(let i=5;i>=0;i--){const d=new Date(now.getFullYear(),now.getMonth()-i,1);const k=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`;mLabels.push(`${d.getMonth()+1}월`);const t=allH.filter(e=>e.date.startsWith(k)).reduce((s,e)=>s+e.sp+e.go+e.no,0);mData.push(parseFloat(t.toFixed(1)));}
   if(RC.m)RC.m.destroy();
   RC.m=new Chart(document.getElementById('r-monthly'),{type:'line',data:{labels:mLabels,datasets:[{label:'수확량(kg)',data:mData,borderColor:'#2a5c3f',backgroundColor:'rgba(42,92,63,0.08)',fill:true,tension:0.4,pointRadius:4,pointBackgroundColor:'#2a5c3f'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true},x:{grid:{display:false}}}}});
-  const chMap={};allH.forEach(e=>{if(e.chs)e.chs.forEach(c=>{chMap[c.ch]=(chMap[c.ch]||0)+c.rev;});});
-  const chL=Object.keys(chMap),chD=chL.map(k=>chMap[k]);
+  const chMap={};allH.forEach(e=>e.chs.forEach(c=>{chMap[c.ch]=(chMap[c.ch]||0)+c.rev;}));
+  const chL=Object.keys(chMap);const chD=chL.map(k=>chMap[k]);
   if(RC.c)RC.c.destroy();
   RC.c=new Chart(document.getElementById('r-channel'),{type:'doughnut',data:{labels:chL.length?chL:['데이터 없음'],datasets:[{data:chD.length?chD:[1],backgroundColor:['#2a5c3f','#639922','#e8344a','#d85a30','#185fa5','#ba7517']}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{font:{size:11},boxWidth:10}}}}});
-  const tSp=allH.reduce((s,e)=>s+parseFloat(e.sp||0),0),tGo=allH.reduce((s,e)=>s+parseFloat(e.go||0),0),tNo=allH.reduce((s,e)=>s+parseFloat(e.no||0),0);
+  const tSp=allH.reduce((s,e)=>s+e.sp,0),tGo=allH.reduce((s,e)=>s+e.go,0),tNo=allH.reduce((s,e)=>s+e.no,0);
   if(RC.g)RC.g.destroy();
   RC.g=new Chart(document.getElementById('r-grade'),{type:'doughnut',data:{labels:['특품','상품','하품'],datasets:[{data:[tSp||0.001,tGo||0.001,tNo||0.001],backgroundColor:['#e8344a','#d85a30','#888780']}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{font:{size:11},boxWidth:10}}}}});
   const tLbls=[],tAm=[],tPm=[];
@@ -880,25 +467,9 @@ function refreshReports(){
   RC.t=new Chart(document.getElementById('r-temp'),{type:'line',data:{labels:tLbls,datasets:[{label:'오전',data:tAm,borderColor:'#185fa5',borderWidth:1.5,pointRadius:3,spanGaps:true,tension:0.3},{label:'오후',data:tPm,borderColor:'#d85a30',borderWidth:1.5,pointRadius:3,spanGaps:true,tension:0.3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:true,position:'top',labels:{font:{size:11},boxWidth:10}}},scales:{y:{ticks:{callback:v=>v+'°C'},suggestedMin:0,suggestedMax:35},x:{grid:{display:false},ticks:{font:{size:10},maxRotation:45}}}}});
 }
 
-// ============================================================
-//  INIT
-// ============================================================
-async function initApp() {
-  renderAll();
-  document.getElementById('hdr-date').textContent=new Date().toLocaleDateString('ko-KR',{year:'numeric',month:'long',day:'numeric'});
-  showToast('☁ 클라우드 데이터 로드 완료!');
-}
-
-(async()=>{
-  const url=localStorage.getItem('sb_url'), key=localStorage.getItem('sb_key');
-  if(url&&key){
-    sb=window.supabase.createClient(url,key);
-    document.getElementById('setup-overlay').style.display='none';
-    document.getElementById('main-app').style.display='block';
-    await loadAll();
-    await initApp();
-  }
-})();
+// INIT
+document.getElementById('hdr-date').textContent=new Date().toLocaleDateString('ko-KR',{year:'numeric',month:'long',day:'numeric'});
+renderJournal();renderHarvest();renderPest();refreshDash();renderCal();
 </script>
 </body>
 </html>
